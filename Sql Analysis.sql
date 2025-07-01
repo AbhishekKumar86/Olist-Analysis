@@ -37,3 +37,22 @@ on ot.seller_id = s.seller_id
 group by s.seller_id
 order by avg_rev_score asc
 
+--- Which product categories are most frequently reviewed poorly?
+
+select pc.product_category, avg(o_w.review_score) 
+as 'avg_review_score', count(*) as 'total_poor_rev'
+from products p
+join order_items o
+on p.product_id = o.product_id
+join orders os
+on o.order_id = os.order_id
+join order_review o_w
+on os.order_id = o_w.order_id
+join product_category pc
+on p.product_category = pc.product_category
+WHERE o_w.review_score IN (1, 2)
+group by pc.product_category
+order by total_poor_rev desc
+
+
+
