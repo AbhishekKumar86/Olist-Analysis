@@ -55,4 +55,25 @@ group by pc.product_category
 order by total_poor_rev desc
 
 
+---What percentage of orders receive 1-star vs. 5-star reviews?
+
+select review_score, count(*) *100 / sum(count(*)) over() as 'percentage'
+from order_review
+where review_score in (1,5)
+group by review_score 
+
+------------------------------------------------------ Revenue & Payments---------------------------------------------------------------------------------
+
+--What is the breakdown of revenue by payment type (credit card, boleto, etc.)?
+
+select payment_type, round(sum(payment),2)
+as 'Total_revenue' from order_payments
+group by payment_type
+order by Total_revenue desc
+
+--Which states contribute the most to total revenue?
+
+
+
+
 
