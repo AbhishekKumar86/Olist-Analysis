@@ -73,6 +73,19 @@ order by Total_revenue desc
 
 --Which states contribute the most to total revenue?
 
+select c.customer_state, round(sum(op.payment),2) as 'total_revenue'
+from Customer c
+join orders o
+on c.customer_id = o.customer_id
+join order_payments op
+on o.order_id = op.order_id
+group by c.customer_state
+order by Total_revenue desc
+
+-- What is the average order value per customer?
+
+
+
 
 
 
