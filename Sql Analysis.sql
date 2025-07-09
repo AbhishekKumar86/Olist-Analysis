@@ -96,6 +96,8 @@ JOIN sellers s on oi.seller_id = s.seller_id
 group by oi.seller_id, s.seller_city, s.seller_state
 order by total_orders desc;
 
+--
+
 
 
 
