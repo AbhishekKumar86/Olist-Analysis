@@ -85,6 +85,19 @@ order by Total_revenue desc
 -- What is the average order value per customer?
 
 
+--------------------------------------------------------------------Seller Performance----------------------------------------------------------------------
+
+-- Which sellers have the highest number of orders?
+
+select oi.seller_id,s.seller_city,s.seller_state,
+count (DISTINCT oi.order_id) as total_orders
+FROM order_items oi
+JOIN sellers s on oi.seller_id = s.seller_id
+group by oi.seller_id, s.seller_city, s.seller_state
+order by total_orders desc;
+
+
+
 
 
 
