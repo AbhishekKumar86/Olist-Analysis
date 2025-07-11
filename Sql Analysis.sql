@@ -97,6 +97,36 @@ group by oi.seller_id, s.seller_city, s.seller_state
 order by total_orders desc;
 
 --
+select seller_id, sum(price_value + freight) as 'Total_Revenue'
+from order_items
+group by seller_id
+order by Total_Revenue desc
+
+-- Which sellers receive the most 1-star reviews?
+  
+select ot.seller_id, count(ow.review_score) as 'one_star_reviews'
+from order_items ot
+join orders o on
+ot.order_id = o.order_id
+join order_review ow
+on o.order_id = ow.order_id
+where ow.review_score =1
+group by ot.seller_id
+order by count(ow.review_score) desc
+
+--What is the average delivery delay by seller?
+
+select ot.seller_id, AVG(DATEDIFF(Day, order_estimated_delivery_date,
+order_delivered_customer_date)) as 'avg_delay' from order_items ot
+join orders o
+on ot.order_id = o.order_id
+where o.order_delivered_customer_date IS NOT NULL
+    AND o.order_estimated_delivery_date IS NOT NULL
+group by ot.seller_id
+order by
+    avg_delay desc;
+
+
 
 
 
