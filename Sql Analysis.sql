@@ -126,7 +126,19 @@ group by ot.seller_id
 order by
     avg_delay desc;
 
+-------------------------------------------------------------------------Customer Behavior & Retention------------------------------------------------------------------
 
+--Who are the top 10 customers by total spend?
+
+select top 10 c.customer_id, sum(ot.price_value + ot.freight) as 'Total_spend' from order_items ot
+join orders o
+on ot.order_id = o.order_id
+join Customer c
+on o.customer_id = c.customer_id 
+group by c.customer_id
+order by Total_spend desc
+
+--
 
 
 
