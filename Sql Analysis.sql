@@ -138,6 +138,13 @@ on o.customer_id = c.customer_id
 group by c.customer_id
 order by Total_spend desc
 
+--Which states have the highest number of unique customers?
+
+select c.customer_state, count(distinct c.customer_id) as 'unique_customers'
+from Customer c
+group by c.customer_state
+order by unique_customers desc
+
 --
 
 
