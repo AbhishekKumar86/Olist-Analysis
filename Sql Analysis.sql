@@ -83,6 +83,14 @@ group by c.customer_state
 order by Total_revenue desc
 
 -- What is the average order value per customer?
+select  c.customer_id,ROUND(SUM(oi.price_value + oi.freight) * 1.0 / COUNT(DISTINCT o.order_id), 2) AS avg_order_value
+from Customer c
+join Orders o 
+on c.customer_id = o.customer_id
+join Order_Items oi 
+on o.order_id = oi.order_id
+group by c.customer_id
+order by avg_order_value DESC;
 
 
 --------------------------------------------------------------------Seller Performance----------------------------------------------------------------------
