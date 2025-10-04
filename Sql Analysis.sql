@@ -104,7 +104,8 @@ JOIN sellers s on oi.seller_id = s.seller_id
 group by oi.seller_id, s.seller_city, s.seller_state
 order by total_orders desc;
 
---
+-- Which Seller have generate the higheet Revenue?
+
 select seller_id, sum(price_value + freight) as 'Total_Revenue'
 from order_items
 group by seller_id
